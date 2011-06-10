@@ -12,12 +12,15 @@ public class Reacao {
 	
 	@Column(name="descricao")
 	private String nome;
+		
 	
-	@Column(name="pa1")
-	private int pa1;
+	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.REFRESH})
+	@JoinColumn(name="id_pa1")
+	private PrincipioAtivo principioativo1;
 	
-	@Column(name="pa2")
-	private int pa2;
+	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.REFRESH})
+	@JoinColumn(name="id_pa2")
+	private PrincipioAtivo principioativo2;
 
 	public int getId() {
 		return id;
@@ -35,19 +38,22 @@ public class Reacao {
 		this.nome = nome;
 	}
 
-	public int getPa1() {
-		return pa1;
+	public PrincipioAtivo getPrincipioativo1() {
+		return principioativo1;
 	}
 
-	public void setPa1(int pa1) {
-		this.pa1 = pa1;
+	public void setPrincipioativo1(PrincipioAtivo principioativo1) {
+		this.principioativo1 = principioativo1;
 	}
 
-	public int getPa2() {
-		return pa2;
+	public PrincipioAtivo getPrincipioativo2() {
+		return principioativo2;
 	}
 
-	public void setPa2(int pa2) {
-		this.pa2 = pa2;
+	public void setPrincipioativo2(PrincipioAtivo principioativo2) {
+		this.principioativo2 = principioativo2;
 	}
+	
+	
+
 }
