@@ -34,6 +34,9 @@
 			</tr>
 		</table>
 		<input type="submit" value="Salvar" />
+				<td>
+<a href="http://localhost:8080/InteracoesMedicamentosas/index.jsp"> Voltar </a>
+</td>
 	</form>
 
 </body>

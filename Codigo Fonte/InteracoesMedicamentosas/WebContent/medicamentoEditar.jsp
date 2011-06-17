@@ -2,25 +2,25 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-    <%@ page import="domainModel.Reacao" %>
+    <%@ page import="domainModel.Medicamento" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Editar Reacao</title>
+<title>Editar Medicamento</title>
 </head>
 <body>
 	<%
-	Reacao reacao = (Reacao) request.getAttribute("reacao");
+	Medicamento medicamento = (Medicamento) request.getAttribute("medicamento");
 	%>
-	<form action="/InteracoesMedicamentosas/Reacoes" method="post">
+	<form action="/InteracoesMedicamentosas/Medicamentos" method="post">
 		<table>
 			<tr>
 				<td>
 					Codigo:
 				</td>
 				<td>
-					<input type="text" name="id" value="<% if(reacao != null){ out.print(reacao.getId()); } %>" />
+					<input type="text" name="id" value="<% if(medicamento != null){ out.print(medicamento.getId()); } %>" />
 				</td>
 			</tr>
 			
@@ -29,14 +29,15 @@
 					Nome:
 				</td>
 				<td>
-					<input type="text" name="nome" value="<% if(reacao != null){ out.print(reacao.getNome()); } %>" />
+					<input type="text" name="nome" value="<% if(medicamento != null){ out.print(medicamento.getNome()); } %>" />
 				</td>
 			</tr>
 		</table>
 		<input type="submit" value="Salvar" />
-		<td>
+				<td>
 <a href="http://localhost:8080/InteracoesMedicamentosas/index.jsp"> Voltar </a>
-</td></form>
+</td>
+	</form>
 
 </body>
 </html>

@@ -29,4 +29,14 @@
   	<servlet-name>PrincipioAtivo</servlet-name>
   	<url-pattern>/PrincipiosAtivos</url-pattern>
   </servlet-mapping>
+   <servlet>
+  	<description></description>
+  	<display-name>Medicamento</display-name>
+  	<servlet-name>Medicamento</servlet-name>
+  	<servlet-class>presentation.medicamentoController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Medicamento</servlet-name>
+  	<url-pattern>/Medicamentos</url-pattern>
+  </servlet-mapping>
 </web-app>
