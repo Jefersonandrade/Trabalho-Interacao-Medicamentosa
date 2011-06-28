@@ -6,14 +6,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link  rel="StyleSheet" type="text/css" href="estilo.css" media="screen"/>
 <title>Editar Fabricante</title>
 </head>
 <body>
+<table border="2px solid gray" >
+<tr>
+	<td>
+		<h2 align="center">Interacoes Medicamentosas</h2>
+	</td>
+</tr>
+
+<tr>
+<td>
+<ul id="menu">
+	<li>
+		<a href="http://localhost:8080/InteracoesMedicamentosas/PrincipiosAtivos"> Cadastrar Principio Ativo </a>
+	</li>
+	<li>
+		<a href="http://localhost:8080/InteracoesMedicamentosas/Reacoes"> Cadastrar Reacao </a>
+	</li>
+	<li>
+		<a href="http://localhost:8080/InteracoesMedicamentosas/Medicamentos"> Cadastrar Medicamento </a>
+	</li>
+	<li>
+		<a href="http://localhost:8080/InteracoesMedicamentosas/Fabricantes"> Cadastrar Fabricante </a>
+	</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
 	<%
 	Fabricante fabricante = (Fabricante) request.getAttribute("fabricante");
 	%>
 	<form action="/InteracoesMedicamentosas/Fabricantes" method="post">
-		<table>
+		<table id="tabela">
 			<tr>
 				<td>
 					Codigo:
@@ -33,7 +61,13 @@
 			</tr>
 		</table>
 		<input type="submit" value="Salvar" />
+	</td>
+			</tr>
+		</table>
+		
 	</form>
-
+	</td>
+			</tr>
+	</table>
 </body>
 </html>

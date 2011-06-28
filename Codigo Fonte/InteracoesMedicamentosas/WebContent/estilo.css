@@ -1,0 +1,41 @@
+
+body {
+	line-height: 1;
+	background-color: white;
+}
+
+#menu {
+border:none;
+margin: 0;
+font: 12px Arial, sans-serif;
+}
+#menu li {
+list-style: none; 
+margin: 0;
+display: inline;
+}
+#menu li a {
+height:7px; 
+padding: 4px 3px; 
+margin:0;
+border: 2px solid gray; 
+background: silver;
+text-decoration: none;
+}
+#menu li a:link {
+color: #fff;
+}
+#menu li a:visited {
+color: #fff;
+}
+#menu li a:hover {
+background: #ccc;
+color: #000; 
+border-color: #000;
+}
+
+#tabela {
+background: silver;
+color: #000; 
+border: 2px solid gray;
+}
