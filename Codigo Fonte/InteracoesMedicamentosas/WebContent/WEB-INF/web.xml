@@ -10,24 +10,43 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-  	<description></description>
-  	<display-name>PrincipioAtivo</display-name>
-  	<servlet-name>PrincipioAtivo</servlet-name>
-  	<servlet-class>presentation.principioativoController</servlet-class>
+    <description></description>
+    <display-name>Reacao</display-name>
+    <servlet-name>Reacao</servlet-name>
+    <servlet-class>presentation.reacaoController</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>PrincipioAtivo</servlet-name>
-  	<url-pattern>/principioativo</url-pattern>
+    <servlet-name>Reacao</servlet-name>
+    <url-pattern>/Reacoes</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<description></description>
-  	<display-name>Reacao</display-name>
-  	<servlet-name>Reacao</servlet-name>
-  	<servlet-class>presentation.reacaoController</servlet-class>
+    <description></description>
+    <display-name>PrincipioAtivo</display-name>
+    <servlet-name>PrincipioAtivo</servlet-name>
+    <servlet-class>presentation.principioativoController</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>Reacao</servlet-name>
-  	<url-pattern>/reacao</url-pattern>
+    <servlet-name>PrincipioAtivo</servlet-name>
+    <url-pattern>/PrincipiosAtivos</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Medicamento</display-name>
+    <servlet-name>Medicamento</servlet-name>
+    <servlet-class>presentation.medicamentoController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Medicamento</servlet-name>
+    <url-pattern>/Medicamentos</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Fabricante</display-name>
+    <servlet-name>Fabricante</servlet-name>
+    <servlet-class>presentation.fabricanteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Fabricante</servlet-name>
+    <url-pattern>/Fabricantes</url-pattern>
   </servlet-mapping>
 </web-app>

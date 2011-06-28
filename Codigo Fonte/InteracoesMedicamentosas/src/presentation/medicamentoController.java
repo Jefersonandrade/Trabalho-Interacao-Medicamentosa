@@ -10,33 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataAccess.MedicamentoRepository;
 import dataAccess.ReacaoRepository;
-import domainModel.Reacao;
+import domainModel.Medicamento;
 
-/**
- * Servlet implementation class reacaoController
- */
-@WebServlet("/Reacoes")
-public class reacaoController extends HttpServlet {
+@WebServlet("/medicamentoController")
+public class medicamentoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	/**
-     * @see HttpServlet#HttpServlet()
-     */
+	
 	//Declaração do Repositório
-	ReacaoRepository repositorio;
+	MedicamentoRepository repositorio;
     
 	//Construtor do Servlet
-    public reacaoController() {
+    public medicamentoController() {
         super();
         
       //Inicialização do Repositório
-        repositorio = new ReacaoRepository();
-    }
+        repositorio = new MedicamentoRepository();   
+}
 
-    /**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Verificar se o Parâmetro edit foi passado
 		String edit = request.getParameter("edit");
@@ -47,19 +39,23 @@ public class reacaoController extends HttpServlet {
 				//Converter 
 				try{
 					//carrega o Reacao do BD
-					Reacao reacao = repositorio.Open(Integer.parseInt(edit));
+					Medicamento medicamento = repositorio.Open(Integer.parseInt(edit));
 					
 					//Passa o Reacao para a página JSP
-					request.setAttribute("reacao", reacao);
+					request.setAttribute("medicamento", medicamento);
 					
 				}catch (Exception e){
 					e.printStackTrace();
 				}
 				
 			}
+			
+			//Puxando (Listando) dados de Reacoes
+			ReacaoRepository rrepositorio = new ReacaoRepository();
+			request.setAttribute("reacoes", rrepositorio.getAllByName());
 		
 			//Chamar Página JSP
-			RequestDispatcher editar = request.getRequestDispatcher("reacaoEditar.jsp");
+			RequestDispatcher editar = request.getRequestDispatcher("medicamentoEditar.jsp");
 			editar.forward(request, response);
 			return;
 			
@@ -68,63 +64,63 @@ public class reacaoController extends HttpServlet {
 		String del = request.getParameter("del");
 		if(del != null){
 			try {
-				//Carrega o Reacao do BD 
-				Reacao reacao = repositorio.Open(Integer.parseInt(del));
+				//Carrega o Medicamento do BD 
+				Medicamento medicamento = repositorio.Open(Integer.parseInt(del));
 				
-				//Apaga reacao carregado da base 
-				repositorio.Delete(reacao);
+				//Apaga medicamento carregado da base 
+				repositorio.Delete(medicamento);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
 		//Gera uma listagem de TODOS as reacoes
-		List reacoes = repositorio.getAllByName();
+		ReacaoRepository rrepositorio = new ReacaoRepository();
+		List reacoes = rrepositorio.getAllByName();
+		
+		//Gera uma listagem de Todos os Medicamentos
+		List medicamentos = repositorio.getAllbyName();
 		
 		//Passa a listagem para a pagina JSP
-		request.setAttribute("reacoes", reacoes);
+		request.setAttribute("medicamentos", medicamentos);
 		
 		//Chamar a página JSP
-		RequestDispatcher listagem = request.getRequestDispatcher("reacoesListagem.jsp");
+		RequestDispatcher listagem = request.getRequestDispatcher("medicamentosListagem.jsp");
 		listagem.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// Recebe os parâmetros do formulário
 			String cod = request.getParameter("id");
 			String nome = request.getParameter("nome");
 			
-			Reacao reacao;
+			
+			Medicamento medicamento;
 			
 			// Carrega o objeto do banco de dados
 			if(cod != null && cod.length() != 0)
-				reacao = repositorio.Open(Integer.parseInt(cod));
+				medicamento = repositorio.Open(Integer.parseInt(cod));
 			else
-				reacao = new Reacao();
+				medicamento = new Medicamento();
 			
-			reacao.setNome(nome);
+			medicamento.setNome(nome);
+			//Adicionar outros campos
 			
-			repositorio.Save(reacao);
+			repositorio.Save(medicamento);
 			
-			// Gera uma listagem de reações
-			List reacoes = repositorio.getAllByName();
+			// Gera uma listagem de Medicamentos
+			List medicamentos = repositorio.getAllbyName();
 			
 			// Passa a listagem para a página JSP
-			request.setAttribute("reacoes", reacoes);
+			request.setAttribute("medicamentos", medicamentos);
 			
 			// Chamar a página JSP
-			RequestDispatcher listagem = request.getRequestDispatcher("reacoesListagem.jsp");
+			RequestDispatcher listagem = request.getRequestDispatcher("medicamentosListagem.jsp");
 			listagem.forward(request, response);
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-		}	
-			
+		}		
 	}
-
 }

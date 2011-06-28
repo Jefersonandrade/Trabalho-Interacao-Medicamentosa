@@ -1,7 +1,6 @@
 package presentation;
 
 import java.io.IOException;
-
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,33 +10,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataAccess.PrincipioAtivoRepository;
-import domainModel.PrincipioAtivo;
+import dataAccess.FabricanteRepository;
+import domainModel.Fabricante;
 
-/**
- * Servlet implementation class principioativoController
- */
-@WebServlet("/PrincipiosAtivos")
-public class principioativoController extends HttpServlet {
+@WebServlet("/fabricantes")
+public class fabricanteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	/**
      * @see HttpServlet#HttpServlet()
      */
 	//Declaração do Repositório
-	PrincipioAtivoRepository repositorio;
+	FabricanteRepository repositorio;
     
 	//Construtor do Servlet
-    public principioativoController() {
+    public fabricanteController() {
         super();
         
       //Inicialização do Repositório
-        repositorio = new PrincipioAtivoRepository();
+        repositorio = new FabricanteRepository();
     }
-    
-    
 
-	/**
+    /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,11 +43,11 @@ public class principioativoController extends HttpServlet {
 			if(!edit.equalsIgnoreCase("new")){
 				//Converter 
 				try{
-					//carrega o PrincipioAtivo do BD
-					PrincipioAtivo principioativo = repositorio.Open(Integer.parseInt(edit));
+					//carrega o Fabricante do BD
+					Fabricante fabricante = repositorio.Open(Integer.parseInt(edit));
 					
-					//Passa o PrincipioAtivo para a página JSP
-					request.setAttribute("principioativo", principioativo);
+					//Passa o Fabricante para a página JSP
+					request.setAttribute("fabricante", fabricante);
 					
 				}catch (Exception e){
 					e.printStackTrace();
@@ -62,7 +56,7 @@ public class principioativoController extends HttpServlet {
 			}
 		
 			//Chamar Página JSP
-			RequestDispatcher editar = request.getRequestDispatcher("principioAtivoEditar.jsp");
+			RequestDispatcher editar = request.getRequestDispatcher("fabricanteEditar.jsp");
 			editar.forward(request, response);
 			return;
 			
@@ -71,60 +65,64 @@ public class principioativoController extends HttpServlet {
 		String del = request.getParameter("del");
 		if(del != null){
 			try {
-				//Carrega o PrincipioAtivo do BD 
-				PrincipioAtivo principioativo = repositorio.Open(Integer.parseInt(del));
+				//Carrega o fabricante do BD 
+				Fabricante fabricante = repositorio.Open(Integer.parseInt(del));
 				
-				//Apaga principioativo carregado da base 
-				repositorio.Delete(principioativo);
+				//Apaga fabricante carregado da base 
+				repositorio.Delete(fabricante);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		//Gera uma listagem de TODOS os PrincipioAtivo
-		List principiosativos = repositorio.getAllByName();
+		//Gera uma listagem de TODOS os fabricantes
+		List fabricantes = repositorio.getAllbyName();
 		
 		//Passa a listagem para a pagina JSP
-		request.setAttribute("principiosativos", principiosativos);
+		request.setAttribute("fabricantes", fabricantes);
 		
 		//Chamar a página JSP
-		RequestDispatcher listagem = request.getRequestDispatcher("principiosativosListagem.jsp");
+		RequestDispatcher listagem = request.getRequestDispatcher("fabricantesListagem.jsp");
 		listagem.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		try {
 			// Recebe os parâmetros do formulário
 			String cod = request.getParameter("id");
 			String nome = request.getParameter("nome");
 			
-			PrincipioAtivo principioativo;
+			
+			Fabricante fabricante;
 			
 			// Carrega o objeto do banco de dados
 			if(cod != null && cod.length() != 0)
-				principioativo = repositorio.Open(Integer.parseInt(cod));
+				fabricante = repositorio.Open(Integer.parseInt(cod));
 			else
-				principioativo = new PrincipioAtivo();
+				fabricante = new Fabricante();
 			
-			principioativo.setNome(nome);
+			fabricante.setNome(nome);
 			
-			repositorio.Save(principioativo);
+			repositorio.Save(fabricante);
 			
-			// Gera uma listagem de TODOS os principiosativos
-			List principiosativos = repositorio.getAllByName();
+			// Gera uma listagem de fabricantes
+			List fabricantes = repositorio.getAllbyName();
 			
 			// Passa a listagem para a página JSP
-			request.setAttribute("principiosativos", principiosativos);
+			request.setAttribute("fabricantes", fabricantes);
 			
 			// Chamar a página JSP
-			RequestDispatcher listagem = request.getRequestDispatcher("principiosativosListagem.jsp");
+			RequestDispatcher listagem = request.getRequestDispatcher("fabricantesListagem.jsp");
 			listagem.forward(request, response);
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-		}
+		}	
+			
 	}
+
 }

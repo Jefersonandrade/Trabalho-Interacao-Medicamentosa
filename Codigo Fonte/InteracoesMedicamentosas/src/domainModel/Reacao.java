@@ -1,8 +1,9 @@
 package domainModel;
 import javax.persistence.*;
 
+
 @Entity
-@Table(name="reacao")
+@Table(name="reacoes")
 public class Reacao {
 	
 	@Id
@@ -13,14 +14,6 @@ public class Reacao {
 	@Column(name="descricao")
 	private String nome;
 		
-	
-	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.REFRESH})
-	@JoinColumn(name="id_pa1")
-	private PrincipioAtivo principioativo1;
-	
-	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.REFRESH})
-	@JoinColumn(name="id_pa2")
-	private PrincipioAtivo principioativo2;
 
 	public int getId() {
 		return id;
@@ -37,23 +30,4 @@ public class Reacao {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public PrincipioAtivo getPrincipioativo1() {
-		return principioativo1;
-	}
-
-	public void setPrincipioativo1(PrincipioAtivo principioativo1) {
-		this.principioativo1 = principioativo1;
-	}
-
-	public PrincipioAtivo getPrincipioativo2() {
-		return principioativo2;
-	}
-
-	public void setPrincipioativo2(PrincipioAtivo principioativo2) {
-		this.principioativo2 = principioativo2;
-	}
-	
-	
-
 }

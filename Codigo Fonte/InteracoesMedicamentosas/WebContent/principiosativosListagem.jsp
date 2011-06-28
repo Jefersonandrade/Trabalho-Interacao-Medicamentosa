@@ -8,25 +8,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Listagem de Reacoes</title>
+<title>Listagem de Principios Ativos</title>
 </head>
 <body>
 <%
-	List principiosativos = (List) request.getAttribute("principioAtivo");
+	List principiosativos = (List) request.getAttribute("principiosativos");
 	if(principiosativos != null){
 		%>
 		<table>
+		<tr>
+		<td>
+<a> Cadastrar Principio Ativo </a>
+</td>
+</tr>
 		<tr><td>ID</td><td>Nome</td></tr>
 		<%
 		Iterator it = principiosativos.iterator();
 		while(it.hasNext()){
-			PrincipioAtivo c= (PrincipioAtivo)it.next();
+			PrincipioAtivo pa= (PrincipioAtivo)it.next();
 			%>
 				<tr>
-					<td><%=c.getId() %></td>
-					<td><%=c.getNome() %></td>			
-					<td><a href="/interacoesmedicamentosas/PrincipiosAtivos?edit=<%=c.getId() %>">Editar</a></td>
-					<td><a href="/interacoesmedicamentosas/PrincipiosAtivos?del=<%=c.getId() %>">Apagar</a></td>
+					<td><%=pa.getId() %></td>
+					<td><%=pa.getNome() %></td>			
+					<td><a href="/InteracoesMedicamentosas/PrincipiosAtivos?edit=<%=pa.getId() %>">Editar</a></td>
+					<td><a href="/InteracoesMedicamentosas/PrincipiosAtivos?del=<%=pa.getId() %>">Apagar</a></td>
 					
 				</tr>
 			<%
@@ -36,7 +41,11 @@
 		<%
 	}
 %>
-<a href="/interacoesmedicamentosas/PrincipiosAtivos?edit=new">Criar Novo Principio Ativo</a>
-
+<a href="/InteracoesMedicamentosas/PrincipiosAtivos?edit=new">Criar Novo Principio Ativo</a>
+<tr>
+		<td>
+<a href="http://localhost:8080/InteracoesMedicamentosas/index.jsp"> Voltar </a>
+</td>
+</tr>
 </body>
 </html>

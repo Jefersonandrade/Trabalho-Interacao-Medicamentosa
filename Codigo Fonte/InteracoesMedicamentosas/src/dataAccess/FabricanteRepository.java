@@ -1,29 +1,23 @@
 package dataAccess;
 
 import java.util.List;
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import domainModel.Fabricante;
 
-import domainModel.PrincipioAtivo;
-
-public class PrincipioAtivoRepository 
-{
+public class FabricanteRepository {
 	private EntityManager manager;
 	private EntityManagerFactory factory;
 	private EntityTransaction transaction;
 	
-	public PrincipioAtivoRepository() {
-		factory = Persistence.createEntityManagerFactory("InteracoesMedicamentosas"); 
+	public FabricanteRepository(){
+		factory = Persistence.createEntityManagerFactory("InteracoesMedicamentosas");
 		manager = factory.createEntityManager();
-		
 	}
-	
-	public void Save(PrincipioAtivo obj) throws Exception {
-		try {
+	public void Save(Fabricante obj) throws Exception{
+		try{
 			transaction = manager.getTransaction();
 			transaction.begin();
 			manager.persist(obj);
@@ -34,9 +28,8 @@ public class PrincipioAtivoRepository
 			throw ex;
 		}
 	}
-	
-	public void Delete(PrincipioAtivo obj) throws Exception {
-		try {
+	public void Delete(Fabricante obj) throws Exception{
+		try{
 			transaction = manager.getTransaction();
 			transaction.begin();
 			manager.remove(obj);
@@ -47,24 +40,21 @@ public class PrincipioAtivoRepository
 			throw ex;
 		}
 	}
-	
-	public PrincipioAtivo Open(int id) throws Exception {
-		try {
-			return manager.find(PrincipioAtivo.class, id);
+	public Fabricante Open(int id)throws Exception{
+		try{
+			return manager.find(Fabricante.class, id);
 		}
 		catch(Exception ex){
 			throw ex;
 		}
 	}
-	
-	public List getTop10ByName() {
-		return manager.createQuery("select pa from PrincipioAtivo pa order by pa.nome")
+	public List getTop10ByName(){
+		return manager.createQuery("select f from Fabricante f order by f.nome")
 		.setMaxResults(10).getResultList();
 	}
 	
-	public List getAllByName() {
-		return manager.createQuery("select pa from PrincipioAtivo pa order by pa.nome")
+	public List getAllbyName(){
+		return manager.createQuery("select f from Fabricante f order by f.nome")
 		.getResultList();
 	}
-
 }

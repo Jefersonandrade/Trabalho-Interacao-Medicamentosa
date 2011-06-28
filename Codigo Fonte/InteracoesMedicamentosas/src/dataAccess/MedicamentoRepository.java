@@ -1,29 +1,23 @@
 package dataAccess;
 
 import java.util.List;
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import domainModel.Medicamento;
 
-import domainModel.PrincipioAtivo;
-
-public class PrincipioAtivoRepository 
-{
+public class MedicamentoRepository {
 	private EntityManager manager;
 	private EntityManagerFactory factory;
 	private EntityTransaction transaction;
 	
-	public PrincipioAtivoRepository() {
-		factory = Persistence.createEntityManagerFactory("InteracoesMedicamentosas"); 
+	public MedicamentoRepository(){
+		factory = Persistence.createEntityManagerFactory("InteracoesMedicamentosas");
 		manager = factory.createEntityManager();
-		
 	}
-	
-	public void Save(PrincipioAtivo obj) throws Exception {
-		try {
+	public void Save(Medicamento obj) throws Exception{
+		try{
 			transaction = manager.getTransaction();
 			transaction.begin();
 			manager.persist(obj);
@@ -34,9 +28,8 @@ public class PrincipioAtivoRepository
 			throw ex;
 		}
 	}
-	
-	public void Delete(PrincipioAtivo obj) throws Exception {
-		try {
+	public void Delete(Medicamento obj) throws Exception{
+		try{
 			transaction = manager.getTransaction();
 			transaction.begin();
 			manager.remove(obj);
@@ -47,24 +40,21 @@ public class PrincipioAtivoRepository
 			throw ex;
 		}
 	}
-	
-	public PrincipioAtivo Open(int id) throws Exception {
-		try {
-			return manager.find(PrincipioAtivo.class, id);
+	public Medicamento Open(int id)throws Exception{
+		try{
+			return manager.find(Medicamento.class, id);
 		}
 		catch(Exception ex){
 			throw ex;
 		}
 	}
-	
-	public List getTop10ByName() {
-		return manager.createQuery("select pa from PrincipioAtivo pa order by pa.nome")
+	public List getTop10ByName(){
+		return manager.createQuery("select m from Medicamento m order by m.nome")
 		.setMaxResults(10).getResultList();
 	}
 	
-	public List getAllByName() {
-		return manager.createQuery("select pa from PrincipioAtivo pa order by pa.nome")
+	public List getAllbyName(){
+		return manager.createQuery("select m from Medicamento m order by m.nome")
 		.getResultList();
 	}
-
 }

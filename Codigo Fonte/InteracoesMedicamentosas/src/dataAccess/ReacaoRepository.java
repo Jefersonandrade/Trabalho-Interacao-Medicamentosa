@@ -4,8 +4,8 @@ import domainModel.Reacao;
 import java.util.List;
 import javax.persistence.*;
 
-public class ReacaoRepository {
-	
+public class ReacaoRepository
+{
 	private EntityManager manager;
 	private EntityManagerFactory factory;
 	private EntityTransaction transaction;
@@ -52,12 +52,12 @@ public class ReacaoRepository {
 	}
 	
 	public List getTop10ByName() {
-		return manager.createQuery("select r from Reacao r order by r.descricao")
+		return manager.createQuery("select r from Reacao r order by r.nome")
 		.setMaxResults(10).getResultList();
 	}
 	
 	public List getAllByName() {
-		return manager.createQuery("select r from Reacao r order by r.descricao")
+		return manager.createQuery("select r from Reacao r order by r.nome")
 		.getResultList();
 	}
 
